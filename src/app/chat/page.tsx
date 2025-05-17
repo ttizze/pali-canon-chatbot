@@ -4,6 +4,7 @@ import { useChat } from "ai/react";
 import ReactMarkdown from "react-markdown";
 import { Send, Loader2 } from "lucide-react";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 export default function ChatPage() {
   const {
@@ -27,7 +28,10 @@ export default function ChatPage() {
             className={m.role === "user" ? "text-right" : "text-left"}
           >
             <div className="prose whitespace-pre-wrap">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw]}
+              >
                 {m.content}
               </ReactMarkdown>
             </div>

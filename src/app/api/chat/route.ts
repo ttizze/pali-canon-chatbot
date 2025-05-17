@@ -15,7 +15,10 @@ export async function POST(req: NextRequest) {
         type: "message",
         role: "system",
         content:
-          "あなたはパーリ仏典の専門家。回答は必ず日本語で行い、各引用にスッタ名と段落番号、原文を含めること。"
+          `あなたはテーラワーダ仏教の専門家です。
+          回答は必ずテーラワーダ仏教の教義に基づいて行うこと。
+          また、回答は必ず日本語で、質問に端的に答えてください。
+          質問者が解脱へと近づくように、質問に対する回答を行ってください。`
       },
       ...messages.map((m: any) => ({
         type: "message",
@@ -24,7 +27,6 @@ export async function POST(req: NextRequest) {
       }))
     ]
   });
-  console.log("res:", res);
   const citationBlocks: string[] = [];
 
   for (const item of res.output ?? []) {
@@ -42,14 +44,17 @@ export async function POST(req: NextRequest) {
 
 ---
 
-## 📚 出典
+<details>
+<summary>📚 出典</summary>
 
-${citationBlocks.join("\n\n")}`
+${citationBlocks.join("\n\n")}
+
+</details>`
     : res.output_text;
   /* ──────────────────────────────────────── */
 
   return new Response(answer, {
-    headers: { "Content-Type": "text/plain; charset=utf-8" }
+    headers: { "Content-Type": "text/markdown; charset=utf-8" }
   });
 
 }
