@@ -55,6 +55,16 @@ export default function ChatPage() {
           onChange={handleInputChange}
           rows={3}
           disabled={isLoading}
+          onKeyDown={e => {
+            if (
+              (e.key === "Enter" && (e.ctrlKey || e.metaKey)) // Ctrl+Enter (Win/Linux), Cmd+Enter (Mac)
+            ) {
+              e.preventDefault();
+              if (input.trim() && !isLoading) {
+                handleSubmit(e as any);
+              }
+            }
+          }}
         />
         <button
           type="submit"
