@@ -20,15 +20,14 @@ async function fetchHtml(url: string) {
   return load(data);
 }
 
-// ひらがな・カタカナ・漢字・英数のみ残し、他を "_"
+// Windows 禁止 9 文字と制御文字だけ "_" に置換する簡易サニタイズ
 function sanitize(name: string) {
-  return (
-    name
-      .normalize("NFKC")                               // 全角英数などを正規化
-      .replace(/[^\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\w]+/gu, "_")
-      .replace(/^_+|_+$/g, "")                        // 先頭末尾の "_" を除去
-      .replace(/_+/g, "_")                            // 連続 "_" を 1 つに
-  );
+  return name
+    .normalize("NFKC")                       // 全角⇔半角などを正規化（任意）
+    // Windows で使えない 9 文字と制御文字を "_"
+    .replace(/[\/\\:*?"<>|\x00-\x1F]/g, "_")
+    .replace(/_+/g, "_")                    // 連続 "_" を 1 個に
+    .replace(/^_+|_+$/g, "");               // 先頭・末尾 "_" を除去
 }
 
 async function main() {

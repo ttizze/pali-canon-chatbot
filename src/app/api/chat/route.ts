@@ -25,25 +25,31 @@ export async function POST(req: NextRequest) {
     ]
   });
   console.log("res:", res);
-  const citations: string[] = [];
+  const citationBlocks: string[] = [];
+
   for (const item of res.output ?? []) {
     if (item.type === "file_search_call" && item.results) {
       for (const r of item.results) {
-        // ファイル名 + スニペット先頭 80 文字
-        citations.push(
-          `- ${r.filename ?? r.file_id}: ${r.text?.trim().slice(0, 80)}…`
+        citationBlocks.push(
+          `- **${r.filename ?? r.file_id}**\n  > ${r.text?.trim()}`
         );
       }
     }
   }
-  console.log("citations:", citations);
-  const answer =
-    citations.length > 0
-      ? `${res.output_text}\n\n---\n### 出典\n${citations.join("\n")}`
-      : res.output_text;
-  console.log("answer:", answer);
+
+  const answer = citationBlocks.length
+    ? `${res.output_text.trim()}
+
+---
+
+## 📚 出典
+
+${citationBlocks.join("\n\n")}`
+    : res.output_text;
+  /* ──────────────────────────────────────── */
 
   return new Response(answer, {
     headers: { "Content-Type": "text/plain; charset=utf-8" }
   });
+
 }
