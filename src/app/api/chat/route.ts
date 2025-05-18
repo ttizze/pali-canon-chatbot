@@ -5,7 +5,7 @@ const openai = new OpenAI();
 
 export async function POST(req: NextRequest) {
   const { messages } = await req.json(); // [{role:"user", content:"…"}]
-
+  console.log(messages);
   const res = await openai.responses.create({
     model: "o3-mini",
     tools: [{ type: "file_search", vector_store_ids: [vectorStoreId] }],
@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
       }))
     ]
   });
+  console.log(res.output_text);
   const citationBlocks: string[] = [];
 
   for (const item of res.output ?? []) {
