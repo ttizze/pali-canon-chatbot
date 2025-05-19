@@ -5,7 +5,10 @@ import ReactMarkdown from "react-markdown";
 import { Send, Loader2 } from "lucide-react";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import clsx from "clsx";
 export default function ChatPage() {
   const {
     messages,
@@ -21,7 +24,7 @@ export default function ChatPage() {
   return (
     <main className="mx-auto flex max-w-2xl flex-col gap-4 p-6">
       {/* メッセージ表示エリア */}
-      <div className="flex-1 space-y-4 overflow-y-auto rounded-lg border p-4 shadow">
+      <div className="flex-1 space-y-4 overflow-y-auto rounded-lg p-4 shadow">
         {messages.map(m => (
           <div
             key={m.id}
@@ -48,9 +51,12 @@ export default function ChatPage() {
       </div>
 
       {/* 入力フォーム */}
-      <form onSubmit={handleSubmit} className="flex gap-2">
-        <textarea
-          className="flex-1 resize-none rounded-xl border p-3 shadow text-black"
+      <form
+        onSubmit={handleSubmit}
+        className="relative border rounded-xl p-2"
+      >
+        <Textarea
+          className="resize-none border-none p-3 pr-14 shadow "
           value={input}
           onChange={handleInputChange}
           rows={3}
@@ -66,9 +72,9 @@ export default function ChatPage() {
             }
           }}
         />
-        <button
+        <Button
           type="submit"
-          className="rounded-xl bg-blue-600 p-3 text-white shadow disabled:opacity-50"
+          className="absolute bottom-3 right-3 rounded-xl p-3 text-white shadow disabled:opacity-50"
           disabled={!input.trim() || isLoading}
           aria-label="送信"
         >
@@ -77,8 +83,20 @@ export default function ChatPage() {
           ) : (
             <Send className="h-5 w-5" />
           )}
-        </button>
+        </Button>
       </form>
+      <div
+        className={clsx(
+          "flex flex-col sm:flex-row items-start sm:items-center gap-4 rounded-xl border p-4 shadow-lg bg-muted/30 backdrop-blur", // base styles
+        )}
+      >
+        <p className="text-sm sm:text-base font-medium leading-relaxed">
+          このチャットボットは みなさまのご寄付で運営されています。
+        </p>
+        <Button asChild size="sm" className="whitespace-nowrap">
+          <Link href="https://buy.stripe.com/aFa28r7I68gd28S7wq1oP3z">ご支援はこちら ▶</Link>
+        </Button>
+      </div>
     </main>
   );
 }
