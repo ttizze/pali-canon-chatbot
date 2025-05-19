@@ -34,3 +34,16 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Donations
+
+You can accept donations through Stripe by setting up the following environment variables:
+
+```
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_PRICE_ID=price_...
+STRIPE_SUCCESS_URL=http://localhost:3000/donate
+STRIPE_CANCEL_URL=http://localhost:3000/donate
+```
+
+After configuring these variables, run the development server and visit `/donate` to test the checkout flow.
