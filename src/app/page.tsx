@@ -3,12 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useChat } from "ai/react";
-import clsx from "clsx";
 import { Loader2, Send } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { HeartHandshake } from "lucide-react";
 export default function ChatPage() {
 	const { messages, input, handleInputChange, handleSubmit, isLoading } =
 		useChat({
@@ -78,20 +79,63 @@ export default function ChatPage() {
 					)}
 				</Button>
 			</form>
-			<div
-				className={clsx(
-					"flex flex-col sm:flex-row items-start sm:items-center gap-4 rounded-xl border p-4 shadow-lg bg-muted/30 backdrop-blur", // base styles
-				)}
-			>
-				<p className="text-sm sm:text-base font-medium leading-relaxed">
-					このチャットボットは みなさまのご寄付で運営されています。
-				</p>
-				<Button asChild size="sm" className="whitespace-nowrap">
-					<Link href="https://buy.stripe.com/aFa28r7I68gd28S7wq1oP3z">
-						ご支援はこちら ▶
-					</Link>
-				</Button>
-			</div>
+			{/* --- 💖 Support Callout ここから --- */}
+			<Alert
+  variant="default"
+  /* カード本体 ── ほんのり赤み＋ガラス感＋リング */
+  className="
+    group relative flex flex-col sm:flex-row items-start sm:items-center gap-4
+    rounded-xl border border-rose-500/40
+    bg-rose-400/5 dark:bg-rose-500/15      /* ① 背景にうっすら赤系 */
+    backdrop-blur-md shadow-lg
+    ring-1 ring-inset ring-rose-500/20     /* ② リングで縁を強調 */
+    transition-colors
+  "
+>
+  {/* ③ ホバー時にふわっと光るグロー */}
+  <span
+    className="
+      pointer-events-none absolute inset-0 -z-10 rounded-[inherit]
+      opacity-0 group-hover:opacity-100
+      bg-rose-500/20 blur-lg transition-opacity duration-500
+    "
+  />
+
+  {/* アイコン */}
+  <HeartHandshake className="h-6 w-6 shrink-0 text-rose-400" />
+
+  {/* テキスト */}
+  <div className="flex-1 space-y-1">
+    <AlertTitle className="text-base font-semibold text-rose-50">
+      ご支援のお願い
+    </AlertTitle>
+    <AlertDescription className="text-sm leading-6">
+      このチャットボットはみなさまのご寄付で運営されています。<br />
+      現在のご支援額総額は
+      <span className="mx-1 font-bold text-rose-400">¥1,000</span>
+      です。
+    </AlertDescription>
+  </div>
+
+  {/* CTA ボタン */}
+  <Button
+    asChild
+    size="sm"
+    className="
+      mt-2 sm:mt-0 whitespace-nowrap
+      bg-rose-600 hover:bg-rose-700 text-white
+    "
+  >
+    <Link
+      href="https://buy.stripe.com/aFa28r7I68gd28S7wq1oP3z"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      ご支援はこちら&nbsp;▶
+    </Link>
+  </Button>
+</Alert>
+			{/* --- 💖 Support Callout ここまで --- */}
 		</main>
 	);
 }
