@@ -9,7 +9,8 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { HeartHandshake } from "lucide-react";
+import { HeartHandshake, MessageCircle } from "lucide-react";
+
 export default function ChatPage() {
 	const { messages, input, handleInputChange, handleSubmit, isLoading } =
 		useChat({
@@ -19,6 +20,7 @@ export default function ChatPage() {
 
 	return (
 		<main className="mx-auto flex max-w-2xl flex-col gap-4 p-6">
+			<h1 className="text-2xl font-bold">仏教AI</h1>
 			{/* メッセージ表示エリア */}
 			<div className="flex-1 space-y-4 overflow-y-auto rounded-lg p-4 shadow">
 				{messages.map((m) => (
@@ -81,61 +83,113 @@ export default function ChatPage() {
 			</form>
 			{/* --- 💖 Support Callout ここから --- */}
 			<Alert
-  variant="default"
-  /* カード本体 ── ほんのり赤み＋ガラス感＋リング */
-  className="
-    group relative flex flex-col sm:flex-row items-start sm:items-center gap-4
-    rounded-xl border border-rose-500/40
-    bg-rose-400/5 dark:bg-rose-500/15      /* ① 背景にうっすら赤系 */
-    backdrop-blur-md shadow-lg
-    ring-1 ring-inset ring-rose-500/20     /* ② リングで縁を強調 */
-    transition-colors
-  "
->
-  {/* ③ ホバー時にふわっと光るグロー */}
-  <span
-    className="
-      pointer-events-none absolute inset-0 -z-10 rounded-[inherit]
-      opacity-0 group-hover:opacity-100
-      bg-rose-500/20 blur-lg transition-opacity duration-500
-    "
-  />
+				variant="default"
+				className="
+					group relative flex flex-col gap-4
+					rounded-xl border border-rose-500/40
+					bg-rose-400/5 dark:bg-rose-500/15
+					backdrop-blur-md shadow-lg
+					ring-1 ring-inset ring-rose-500/20
+					transition-colors
+				"
+			>
+				{/* グロー用レイヤー */}
+				<span
+					className="
+						pointer-events-none absolute inset-0 -z-10 rounded-[inherit]
+						opacity-0 group-hover:opacity-100
+						bg-rose-500/20 blur-lg transition-opacity duration-500
+					"
+				/>
 
-  {/* アイコン */}
-  <HeartHandshake className="h-6 w-6 shrink-0 text-rose-400" />
+				{/* アイコン＋テキスト */}
+				<div className="flex items-start gap-4">
+					<HeartHandshake className="h-6 w-6 shrink-0 text-rose-400" />
+					<div className="flex-1 space-y-1">
+						<AlertTitle className="text-base font-semibold text-rose-50">
+							ご支援のお願い
+						</AlertTitle>
+						<AlertDescription className="text-sm leading-6">
+							この仏教AIはみなさまのご寄付で運営されています。<br />
+							現在のご支援額総額は
+							<span className="mx-1 font-bold text-rose-400">¥1,000</span>
+							です。
+						</AlertDescription>
+					</div>
+				</div>
 
-  {/* テキスト */}
-  <div className="flex-1 space-y-1">
-    <AlertTitle className="text-base font-semibold text-rose-50">
-      ご支援のお願い
-    </AlertTitle>
-    <AlertDescription className="text-sm leading-6">
-      このチャットボットはみなさまのご寄付で運営されています。<br />
-      現在のご支援額総額は
-      <span className="mx-1 font-bold text-rose-400">¥1,000</span>
-      です。
-    </AlertDescription>
-  </div>
-
-  {/* CTA ボタン */}
-  <Button
-    asChild
-    size="sm"
-    className="
-      mt-2 sm:mt-0 whitespace-nowrap
-      bg-rose-600 hover:bg-rose-700 text-white
-    "
-  >
-    <Link
-      href="https://buy.stripe.com/aFa28r7I68gd28S7wq1oP3z"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      ご支援はこちら&nbsp;▶
-    </Link>
-  </Button>
-</Alert>
+				{/* CTA ボタン – テキストの下＆幅いっぱい */}
+				<Button
+					asChild
+					size="sm"
+					className="
+						w-full
+						bg-rose-600 hover:bg-rose-700 text-white
+					"
+				>
+					<Link
+						href="https://buy.stripe.com/aFa28r7I68gd28S7wq1oP3z"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						ご支援はこちら&nbsp;▶
+					</Link>
+				</Button>
+			</Alert>
 			{/* --- 💖 Support Callout ここまで --- */}
+			{/* --- 📝 Feedback Callout ここから --- */}
+			<Alert
+				variant="default"
+				className="
+					group relative flex flex-col gap-4
+					rounded-xl border border-blue-500/40
+					bg-blue-400/5 dark:bg-blue-500/15
+					backdrop-blur-md shadow-lg
+					ring-1 ring-inset ring-blue-500/20
+					transition-colors
+				"
+			>
+				{/* グロー用レイヤー */}
+				<span
+					className="
+						pointer-events-none absolute inset-0 -z-10 rounded-[inherit]
+						opacity-0 group-hover:opacity-100
+						bg-blue-500/20 blur-lg transition-opacity duration-500
+					"
+				/>
+
+				{/* アイコン + テキストを 1 行に */}
+				<div className="flex items-start gap-4">
+					<MessageCircle className="h-6 w-6 shrink-0 text-blue-400" />
+					<div className="flex-1 space-y-1">
+						<AlertTitle className="text-base font-semibold text-blue-50">
+							ご意見をお聞かせください
+						</AlertTitle>
+						<AlertDescription className="text-sm leading-6">
+							AI の回答精度向上のため、30&nbsp;秒のアンケートにご協力ください。
+						</AlertDescription>
+					</div>
+				</div>
+
+				{/* CTA ボタン – 文言の下＆幅いっぱい */}
+				<Button
+					asChild
+					size="sm"
+					className="
+						w-full
+						bg-blue-600 hover:bg-blue-700 text-white
+					"
+				>
+					<Link
+						href="https://forms.gle/L5YajsYhQBEMkN1e8"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						アンケートに回答&nbsp;▶
+					</Link>
+				</Button>
+			</Alert>
+			{/* --- 📝 Feedback Callout ここまで --- */}
 		</main>
 	);
 }
