@@ -63,7 +63,7 @@ export default function ChatPage() {
 						) {
 							e.preventDefault();
 							if (input.trim() && !isLoading) {
-								handleSubmit(e as any);
+								handleSubmit(e);
 							}
 						}
 					}}
@@ -112,7 +112,7 @@ export default function ChatPage() {
 						<AlertDescription className="text-sm leading-6">
 							この仏教AIはみなさまのご寄付で運営されています。<br />
 							現在のご支援額総額は
-							<span className="mx-1 font-bold text-rose-400">¥1,000</span>
+							<span className="mx-1 font-bold text-rose-400">¥2230</span>
 							です。
 						</AlertDescription>
 					</div>
