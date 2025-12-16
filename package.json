@@ -1,45 +1,45 @@
 {
-	"name": "pali-canon-chatbot",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev --turbopack",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint",
-		"check": "biome check --write"
-	},
-	"dependencies": {
-		"@ai-sdk/openai": "^1.3.22",
-		"@radix-ui/react-icons": "^1.3.2",
-		"@radix-ui/react-slot": "^1.2.2",
-		"ai": "^4.3.15",
-		"axios": "^1.9.0",
-		"cheerio": "^1.0.0",
-		"class-variance-authority": "^0.7.1",
-		"clsx": "^2.1.1",
-		"dotenv": "^16.5.0",
-		"lucide-react": "^0.511.0",
-		"next": "15.0.4",
-		"openai": "^4.100.0",
-		"react": "^19.0.0",
-		"react-dom": "^19.0.0",
-		"react-markdown": "^10.1.0",
-		"rehype-raw": "^7.0.0",
-		"remark-gfm": "^4.0.1",
-		"tailwind-merge": "^3.3.0",
-		"tailwindcss-animate": "^1.0.7"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.9.4",
-		"@types/node": "^22.15.18",
-		"@types/react": "^19",
-		"@types/react-dom": "^19",
-		"eslint": "^8",
-		"eslint-config-next": "15.0.4",
-		"postcss": "^8",
-		"tailwindcss": "^3.4.1",
-		"tsx": "^4.19.4",
-		"typescript": "^5"
-	}
+  "name": "pali-canon-chatbot",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "check": "biome check --write"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^1.3.22",
+    "@radix-ui/react-icons": "^1.3.2",
+    "@radix-ui/react-slot": "^1.2.2",
+    "ai": "^4.3.15",
+    "axios": "^1.9.0",
+    "cheerio": "^1.0.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "dotenv": "^16.5.0",
+    "lucide-react": "^0.511.0",
+    "next": "15.0.7",
+    "openai": "^4.100.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.1",
+    "tailwind-merge": "^3.3.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "^22.15.18",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.4",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "tsx": "^4.19.4",
+    "typescript": "^5"
+  }
 }
